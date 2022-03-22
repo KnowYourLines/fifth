@@ -7,10 +7,13 @@ def fifth():
         cmd = input("")
         if cmd.split(' ')[0] not in valid_commands:
             print('ERROR')
+            end = True
         elif len(cmd.split(' ')) > 2:
             print('ERROR')
+            end = True
         elif len(cmd.split(' ')) == 2 and cmd.split(' ')[0] != 'PUSH':
             print('ERROR')
+            end = True
         elif cmd == "END":
             end = True
         elif cmd.split(' ')[0] == 'PUSH':
@@ -18,6 +21,7 @@ def fifth():
                 stack.append(int(cmd.split(' ')[1]))
             except ValueError:
                 print('ERROR')
+                end = True
         elif cmd == 'POP':
             stack.pop()
 

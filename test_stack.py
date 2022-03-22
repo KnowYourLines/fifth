@@ -16,7 +16,7 @@ class FifthTestCase(unittest.TestCase):
     @patch('sys.stdout', new_callable=StringIO)
     def test_must_be_valid_command(self, stdout, mock_input):
         fifth()
-        self.assertEqual(stdout.getvalue(), 'stack is []\nERROR\nstack is []\n')
+        self.assertEqual(stdout.getvalue(), 'stack is []\nERROR\n')
 
     @patch('builtins.input', side_effect=["PUSH 3", "END"])
     @patch('sys.stdout', new_callable=StringIO)
@@ -34,13 +34,13 @@ class FifthTestCase(unittest.TestCase):
     @patch('sys.stdout', new_callable=StringIO)
     def test_push_must_be_integer(self, stdout, mock_input):
         fifth()
-        self.assertEqual(stdout.getvalue(), 'stack is []\nERROR\nstack is []\n')
+        self.assertEqual(stdout.getvalue(), 'stack is []\nERROR\n')
 
     @patch('builtins.input', side_effect=["PUSH 3 PUSH 5", "END"])
     @patch('sys.stdout', new_callable=StringIO)
     def test_push_one_value_at_a_time(self, stdout, mock_input):
         fifth()
-        self.assertEqual(stdout.getvalue(), 'stack is []\nERROR\nstack is []\n')
+        self.assertEqual(stdout.getvalue(), 'stack is []\nERROR\n')
 
     @patch('builtins.input', side_effect=["PUSH 3", "PUSH 5", "POP", "POP", "END"])
     @patch('sys.stdout', new_callable=StringIO)
@@ -58,7 +58,7 @@ class FifthTestCase(unittest.TestCase):
     @patch('sys.stdout', new_callable=StringIO)
     def test_only_push_takes_integer_argument(self, stdout, mock_input):
         fifth()
-        self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [3]\nERROR\nstack is [3]\n')
+        self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [3]\nERROR\n')
 
 if __name__ == '__main__':
     unittest.main()
