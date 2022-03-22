@@ -50,7 +50,7 @@ class FifthTestCase(unittest.TestCase):
 
     @patch('builtins.input', side_effect=["PUSH 3",  "POP", "PUSH 5", "POP", "END"])
     @patch('sys.stdout', new_callable=StringIO)
-    def test_pushes_and_pops_stack(self, stdout, mock_input):
+    def test_commands_applied_in_sequence(self, stdout, mock_input):
         fifth()
         self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [3]\nstack is []\nstack is [5]\nstack is []\n')
 
@@ -59,6 +59,13 @@ class FifthTestCase(unittest.TestCase):
     def test_only_push_takes_integer_argument(self, stdout, mock_input):
         fifth()
         self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [3]\nERROR\n')
+
+    @patch('builtins.input', side_effect=["PUSH 8", "PUSH 1", "PUSH 3", "SWAP", "PUSH 5",  "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_swaps_top_2_elements(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [8]\nstack is [8, 1]\nstack is [8, 1, 3]\nstack is [8, 3, 1]\nstack is [8, 3, 1, 5]\n')
+
 
 if __name__ == '__main__':
     unittest.main()
