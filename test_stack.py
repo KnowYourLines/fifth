@@ -155,5 +155,6 @@ class FifthTestCase(unittest.TestCase):
         self.assertEqual(stdout.getvalue(),
                          'stack is []\nERROR\n')
 
+
 if __name__ == '__main__':
     unittest.main()
