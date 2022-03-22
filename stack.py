@@ -23,29 +23,57 @@ def fifth():
                 print('ERROR')
                 end = True
         elif cmd == 'POP':
-            stack.pop()
+            try:
+                stack.pop()
+            except IndexError:
+                print('ERROR')
+                end = True
         elif cmd == 'SWAP':
-            second_from_last = stack[-2]
-            stack[-2] = stack[-1]
-            stack[-1] = second_from_last
+            try:
+                second_from_last = stack[-2]
+                stack[-2] = stack[-1]
+                stack[-1] = second_from_last
+            except IndexError:
+                print('ERROR')
+                end = True
         elif cmd == 'DUP':
-            stack.append(stack[-1])
+            try:
+                stack.append(stack[-1])
+            except IndexError:
+                print('ERROR')
+                end = True
         elif cmd == '+':
-            top = stack.pop()
-            bottom = stack.pop()
-            stack.append(top + bottom)
+            try:
+                top = stack.pop()
+                bottom = stack.pop()
+                stack.append(top + bottom)
+            except IndexError:
+                print('ERROR')
+                end = True
         elif cmd == '*':
-            top = stack.pop()
-            bottom = stack.pop()
-            stack.append(top * bottom)
+            try:
+                top = stack.pop()
+                bottom = stack.pop()
+                stack.append(top * bottom)
+            except IndexError:
+                print('ERROR')
+                end = True
         elif cmd == '-':
-            top = stack.pop()
-            bottom = stack.pop()
-            stack.append(bottom - top)
+            try:
+                top = stack.pop()
+                bottom = stack.pop()
+                stack.append(bottom - top)
+            except IndexError:
+                print('ERROR')
+                end = True
         elif cmd == '/':
-            top = stack.pop()
-            bottom = stack.pop()
-            stack.append(int(bottom // top))
+            try:
+                top = stack.pop()
+                bottom = stack.pop()
+                stack.append(int(bottom // top))
+            except IndexError:
+                print('ERROR')
+                end = True
 
 
 if __name__ == '__main__':

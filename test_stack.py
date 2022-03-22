@@ -106,6 +106,54 @@ class FifthTestCase(unittest.TestCase):
         self.assertEqual(stdout.getvalue(),
                          'stack is []\nstack is [2]\nstack is [2, 8]\nstack is [0]\nstack is [0, 6]\nstack is [6]\nstack is [6, 8]\nstack is [0]\n')
 
+    @patch('builtins.input', side_effect=["PUSH 2", "+"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_addition_needs_2_elements(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(),
+                         'stack is []\nstack is [2]\nERROR\n')
+
+    @patch('builtins.input', side_effect=["PUSH 2", "-"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_subtraction_needs_2_elements(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(),
+                         'stack is []\nstack is [2]\nERROR\n')
+
+    @patch('builtins.input', side_effect=["PUSH 2", "*"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_multiplication_needs_2_elements(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(),
+                         'stack is []\nstack is [2]\nERROR\n')
+
+    @patch('builtins.input', side_effect=["PUSH 2", "/"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_division_needs_2_elements(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(),
+                         'stack is []\nstack is [2]\nERROR\n')
+
+    @patch('builtins.input', side_effect=["PUSH 2", "SWAP"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_swap_needs_2_elements(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(),
+                         'stack is []\nstack is [2]\nERROR\n')
+
+    @patch('builtins.input', side_effect=["POP"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_pop_needs_element(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(),
+                         'stack is []\nERROR\n')
+
+    @patch('builtins.input', side_effect=["DUP"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_dup_needs_element(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(),
+                         'stack is []\nERROR\n')
 
 if __name__ == '__main__':
     unittest.main()
