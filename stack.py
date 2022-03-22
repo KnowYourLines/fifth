@@ -1,7 +1,7 @@
 def fifth():
     stack = []
     end = False
-    valid_commands = ['END', 'PUSH', 'POP', 'SWAP', 'DUP', '+', '*']
+    valid_commands = ['END', 'PUSH', 'POP', 'SWAP', 'DUP', '+', '*', '-']
     while not end:
         print(f"stack is {stack}")
         cmd = input("")
@@ -38,6 +38,10 @@ def fifth():
             num1 = stack.pop()
             num2 = stack.pop()
             stack.append(num1 * num2)
+        elif cmd == '-':
+            num1 = stack.pop()
+            num2 = stack.pop()
+            stack.append(num1 - num2)
 
 
 if __name__ == '__main__':

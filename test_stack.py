@@ -85,6 +85,13 @@ class FifthTestCase(unittest.TestCase):
         self.assertEqual(stdout.getvalue(),
                          'stack is []\nstack is [8]\nstack is [8, 2]\nstack is [16]\nstack is [16, 2]\nstack is [32]\n')
 
+    @patch('builtins.input', side_effect=["PUSH 8", "PUSH 2", "-", "PUSH 2", "*", "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_subtracts_top_from_bottom_of_stack(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(),
+                         'stack is []\nstack is [8]\nstack is [8, 2]\nstack is [-6]\nstack is [-6, 2]\nstack is [-12]\n')
+
 
 if __name__ == '__main__':
     unittest.main()
