@@ -42,6 +42,23 @@ class FifthTestCase(unittest.TestCase):
         fifth()
         self.assertEqual(stdout.getvalue(), 'stack is []\nERROR\nstack is []\n')
 
+    @patch('builtins.input', side_effect=["PUSH 3", "PUSH 5", "POP", "POP", "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_pops_from_stack(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [3]\nstack is [3, 5]\nstack is [3]\nstack is []\n')
+
+    @patch('builtins.input', side_effect=["PUSH 3",  "POP", "PUSH 5", "POP", "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_pushes_and_pops_stack(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [3]\nstack is []\nstack is [5]\nstack is []\n')
+
+    @patch('builtins.input', side_effect=["PUSH 3", "POP 3", "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_only_push_takes_integer_argument(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [3]\nERROR\nstack is [3]\n')
 
 if __name__ == '__main__':
     unittest.main()
