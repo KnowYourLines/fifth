@@ -78,6 +78,13 @@ class FifthTestCase(unittest.TestCase):
         fifth()
         self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [8]\nstack is [8, 1]\nstack is [9]\nstack is [9, 1]\nstack is [10]\n')
 
+    @patch('builtins.input', side_effect=["PUSH 8", "PUSH 2", "*", "PUSH 2", "*", "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_multiplication(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(),
+                         'stack is []\nstack is [8]\nstack is [8, 2]\nstack is [16]\nstack is [16, 2]\nstack is [32]\n')
+
 
 if __name__ == '__main__':
     unittest.main()
