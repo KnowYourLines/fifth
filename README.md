@@ -9,5 +9,5 @@ python stack.py
 From top level directory, run tests using:
 
 ```
-python stack.py
+python test_stack.py
 ```
