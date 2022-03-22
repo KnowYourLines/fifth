@@ -72,6 +72,11 @@ class FifthTestCase(unittest.TestCase):
         fifth()
         self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [8]\nstack is [8, 1]\nstack is [8, 1, 1]\n')
 
+    @patch('builtins.input', side_effect=["PUSH 8", "PUSH 1", "+", "PUSH 1", "+", "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_addition(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [8]\nstack is [8, 1]\nstack is [9]\nstack is [9, 1]\nstack is [10]\n')
 
 
 if __name__ == '__main__':
