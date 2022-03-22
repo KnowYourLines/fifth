@@ -12,10 +12,11 @@ def fifth():
         if cmd.split(' ')[0] == 'PUSH':
             if len(cmd.split(' ')) > 2:
                 print('ERROR')
-            try:
-                stack.append(int(cmd.split(' ')[1]))
-            except ValueError:
-                print('ERROR')
+            else:
+                try:
+                    stack.append(int(cmd.split(' ')[1]))
+                except ValueError:
+                    print('ERROR')
 
 
 if __name__ == '__main__':

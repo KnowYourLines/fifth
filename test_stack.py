@@ -24,9 +24,21 @@ class FifthTestCase(unittest.TestCase):
         fifth()
         self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [3]\n')
 
+    @patch('builtins.input', side_effect=["PUSH 3", "PUSH 5", "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_push_multiple_values(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [3]\nstack is [3, 5]\n')
+
     @patch('builtins.input', side_effect=["PUSH 3.2", "END"])
     @patch('sys.stdout', new_callable=StringIO)
     def test_push_must_be_integer(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(), 'stack is []\nERROR\nstack is []\n')
+
+    @patch('builtins.input', side_effect=["PUSH 3 PUSH 5", "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_push_one_value_at_a_time(self, stdout, mock_input):
         fifth()
         self.assertEqual(stdout.getvalue(), 'stack is []\nERROR\nstack is []\n')
 
