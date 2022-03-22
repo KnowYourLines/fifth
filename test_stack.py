@@ -66,6 +66,13 @@ class FifthTestCase(unittest.TestCase):
         fifth()
         self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [8]\nstack is [8, 1]\nstack is [8, 1, 3]\nstack is [8, 3, 1]\nstack is [8, 3, 1, 5]\n')
 
+    @patch('builtins.input', side_effect=["PUSH 8", "PUSH 1", "DUP",  "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_duplicates_last_element(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(), 'stack is []\nstack is [8]\nstack is [8, 1]\nstack is [8, 1, 1]\n')
+
+
 
 if __name__ == '__main__':
     unittest.main()
