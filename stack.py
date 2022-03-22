@@ -45,7 +45,7 @@ def fifth():
         elif cmd == '/':
             top = stack.pop()
             bottom = stack.pop()
-            stack.append(int(bottom / top))
+            stack.append(int(bottom // top))
 
 
 if __name__ == '__main__':

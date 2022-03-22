@@ -99,6 +99,13 @@ class FifthTestCase(unittest.TestCase):
         self.assertEqual(stdout.getvalue(),
                          'stack is []\nstack is [8]\nstack is [8, 2]\nstack is [4]\nstack is [4, 2]\nstack is [2]\n')
 
+    @patch('builtins.input', side_effect=["PUSH 2", "PUSH 8", "/", "PUSH 6", "+", "PUSH 8", "/",  "END"])
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_division_rounds_down(self, stdout, mock_input):
+        fifth()
+        self.assertEqual(stdout.getvalue(),
+                         'stack is []\nstack is [2]\nstack is [2, 8]\nstack is [0]\nstack is [0, 6]\nstack is [6]\nstack is [6, 8]\nstack is [0]\n')
+
 
 if __name__ == '__main__':
     unittest.main()
